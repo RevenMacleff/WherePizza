@@ -1,0 +1,13 @@
+@import "./variables";
+@import "./libs/normalize";
+@import "./components/all";
+
+body {
+  background: #e5e5e5;
+}
+
+.container {
+  max-width: 1288px;
+  margin: 0 auto;
+  padding: 10px;
+}

@@ -1,0 +1,41 @@
+.header {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  &__img {
+    margin-right: 5px;
+  }
+  &__descr {
+  }
+}
+
+.cart {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: #ff7010;
+  border-radius: 4px;
+  &__img {
+    margin-right: 5px;
+  }
+  &__price {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #ffffff;
+  }
+}
