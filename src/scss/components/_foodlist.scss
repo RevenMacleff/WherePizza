@@ -1,0 +1,122 @@
+.food {
+  padding-bottom: 100px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 36px;
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+    color: #191919;
+  }
+
+  &__filter {
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    position: relative;
+    padding: 9px 16px 9px 40px;
+    background: #ffffff;
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    color: #191919;
+    img {
+      position: absolute;
+      left: 16px;
+    }
+  }
+
+  &__up {
+    display: flex;
+    flex-direction: column;
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+
+  &__block {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+
+  &__img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    img {
+      width: 99%;
+      transition: 0.5s all ease;
+      &:hover {
+        position: relative;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__name {
+    margin-top: 16px;
+    margin-bottom: 12px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #191919;
+  }
+
+  &__descr {
+    display: flex;
+    flex-grow: 1;
+    margin-bottom: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #191919;
+  }
+  &__down {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    /*     padding: 0px 20px 20px; */
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__button {
+    background: #ff7010;
+    padding: 13px 32px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+  }
+
+  &__price {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+
+    color: #ff7010;
+  }
+}

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Ads = () => {
-  const [ads, setAds] = useState([]);
-  /*   const ads = [
+  const ads = [
     { id: 0, img: "img/ads1.png", descr: "3 средние пиццы от 999 рублей" },
     {
       id: 1,
@@ -15,23 +14,8 @@ const Ads = () => {
       img: "img/ads4.png",
       descr: "Кэшбек 10% на самовывоз (доставка)",
     },
-  ]; */
+  ];
 
-  const getData = () => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch("http://localhost:3001/ads", requestOptions)
-      .then((response) => response.json())
-      .then((result) => setAds(result))
-      .catch((error) => console.log("error", error));
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
   const result = ads.map((ads) => {
     return (
       <li key={ads.id} className="ads__item">

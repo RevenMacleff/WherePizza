@@ -3,11 +3,16 @@
 @import "./components/all";
 
 body {
-  background: #e5e5e5;
+  background: white;
 }
 
 .container {
-  max-width: 1288px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  &_cart {
+    margin-top: 40px;
+    max-width: 850px;
+  }
 }

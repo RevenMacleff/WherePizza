@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Categories = () => {
-  /*   const categories = [
+  const categories = [
     { id: 0, img: "img/fire.svg", descr: "Акции" },
     { id: 1, img: "img/Pizza.svg", descr: "Пицца" },
     { id: 2, img: "img/Sushi.svg ", descr: "Суши" },
@@ -10,23 +10,9 @@ const Categories = () => {
     { id: 5, img: "img/Combo.svg ", descr: "Комбо " },
     { id: 6, img: "img/Dessert.svg ", descr: "Дессерты" },
     { id: 7, img: "img/Sauce.svg ", descr: "Соусы" },
-  ]; */ const [categories, setCategories] = useState([]);
-  /*   const ads = [
-    { id: 0, img: "img/ads1.png", descr: "3 средние пиццы от 999 рублей" },
-    {
-      id: 1,
-      img: "img/ads2.png",
-      descr: "Кэшбек 10% на самовывоз (доставка)",
-    },
-    { id: 2, img: "img/ads3.png", descr: "3 средние пиццы от 999 рублей" },
-    {
-      id: 3,
-      img: "img/ads4.png",
-      descr: "Кэшбек 10% на самовывоз (доставка)",
-    },
-  ]; */
+  ];
 
-  const getData = () => {
+  /*   const getData = () => {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -43,7 +29,7 @@ const Categories = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, []); */
 
   const listItems = categories.map((categories) => (
     <li key={categories.id} className="categories__item">
