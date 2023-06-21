@@ -1,14 +1,61 @@
 import React, { useState } from "react";
 
-const Filters = ({ isActive, showFilter }) => {
-  const [filtervalue, setFiltervalue] = useState(0);
-
-  const all = ["Хит", "Новинка", "C мясом", "Вегетерианская", "С курицей", "С луком"];
+const Filters = ({ isActive, showFilter, onFilterSelectAll }) => {
+  const [filterall, setFilterall] = useState(0);
+  const [filtercheese, setFiltercheese] = useState(0);
+  const [filtermeat, setFiltermeat] = useState(0);
+  const [filterchoice, setFilterchoice] = useState(0);
+  const all = ["Хит", "Новинка"];
+  const cheese = ["Моцарелла", "Чеддер", "Пармезан"];
+  const meat = ["Пепперони", "Курица", "Ветчина", "Говядина", "Бекон"];
+  const choice = ["Лук", "Перец", "Томаты", "Чеснок", "Огурцы", "Шампиньоны"];
+  const onReset = () => {
+    setFilterall(0);
+    setFiltercheese(0);
+    setFilterchoice(0);
+    setFiltermeat(0);
+  };
   const allMap = all.map((categoryName, id) => {
     return (
       <li
-        className={filtervalue === id ? "filters__check filters__check_active" : "filters__check"}
-        onClick={() => setFiltervalue(id)}>
+        key={id}
+        className={filterall.id === id ? "filters__check filters__check_active" : "filters__check"}
+        onClick={() => setFilterall({ name: categoryName, id: id })}>
+        {categoryName}
+      </li>
+    );
+  });
+
+  const CheeseMap = cheese.map((categoryName, id) => {
+    return (
+      <li
+        key={id}
+        className={
+          filtercheese.id === id ? "filters__check filters__check_active" : "filters__check"
+        }
+        onClick={() => setFiltercheese({ name: categoryName, id: id })}>
+        {categoryName}
+      </li>
+    );
+  });
+  const MeatMap = meat.map((categoryName, id) => {
+    return (
+      <li
+        key={id}
+        className={filtermeat.id === id ? "filters__check filters__check_active" : "filters__check"}
+        onClick={() => setFiltermeat({ name: categoryName, id: id })}>
+        {categoryName}
+      </li>
+    );
+  });
+  const ChoiceMap = choice.map((categoryName, id) => {
+    return (
+      <li
+        key={id}
+        className={
+          filterchoice.id === id ? "filters__check filters__check_active" : "filters__check"
+        }
+        onClick={() => setFilterchoice({ name: categoryName, id: id })}>
         {categoryName}
       </li>
     );
@@ -44,34 +91,28 @@ const Filters = ({ isActive, showFilter }) => {
             <div className="filters__subtitle">Общее</div>
             <ul className="filters__category">{allMap}</ul>
             <div className="filters__subtitle">Сыр</div>
-            <ul className="filters__category">
-              <li className="filters__check">Чеддер</li>
-              <li className="filters__check">Моцарелла</li>
-              <li className="filters__check">С голубой плесенью</li>
-            </ul>
+            <ul className="filters__category">{CheeseMap}</ul>
             <div className="filters__subtitle">Мясо</div>
-            <ul className="filters__category">
-              <li className="filters__check">Пепперони</li>
-              <li className="filters__check">Свинина</li>
-              <li className="filters__check">Ветчина</li>
-              <li className="filters__check">Говядина</li>
-              <li className="filters__check">Куриная грудка</li>
-            </ul>
+            <ul className="filters__category">{MeatMap}</ul>
             <div className="filters__subtitle">Компонент</div>
-            <ul className="filters__category">
-              <li className="filters__check">Шампиньоны</li>
-              <li className="filters__check">Креветка</li>
-              <li className="filters__check">Ананасы</li>
-              <li className="filters__check">Смесь итальянских трав</li>
-              <li className="filters__check">Оливки</li> <li className="filters__check">Томаты</li>
-              <li className="filters__check">Зеленый перец</li>
-              <li className="filters__check">Красный перец</li>
-              <li className="filters__check">Чеснок</li>
-            </ul>
+            <ul className="filters__category">{ChoiceMap}</ul>
           </div>
           <div className="filters__buttons">
-            <button className="button button_none">Сбросить</button>
-            <button className="button">Применить</button>
+            <button className="button button_none" onClick={() => onReset()}>
+              Сбросить
+            </button>
+            <button
+              className="button"
+              onClick={() =>
+                onFilterSelectAll([
+                  filterall.name,
+                  filtercheese.name,
+                  filterchoice.name,
+                  filtermeat.name,
+                ])
+              }>
+              Применить
+            </button>
           </div>
         </div>
       </div>
