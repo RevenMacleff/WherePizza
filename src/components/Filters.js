@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Filters = ({ isActive, showFilter, onFilterSelectAll }) => {
+const Filters = ({ isActive, showFilter, onFilterSelectAll, changePizzasFiltered }) => {
   const [filterall, setFilterall] = useState(0);
   const [filtercheese, setFiltercheese] = useState(0);
   const [filtermeat, setFiltermeat] = useState(0);
@@ -15,6 +15,7 @@ const Filters = ({ isActive, showFilter, onFilterSelectAll }) => {
     setFilterchoice(0);
     setFiltermeat(0);
   };
+  const onChoose = () => {};
   const allMap = all.map((categoryName, id) => {
     return (
       <li

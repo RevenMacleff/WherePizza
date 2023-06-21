@@ -4,7 +4,14 @@ import Skeleton from "./PizzaBlock/Skeleton";
 import Filters from "./Filters";
 import PizzasTop from "./PizzasTop";
 
-const PizzaList = ({ food, loading, title, showFilterbutton, onFilterSelectAll }) => {
+const PizzaList = ({
+  food,
+  loading,
+  title,
+  showFilterbutton,
+  onFilterSelectAll,
+  changePizzasFiltered,
+}) => {
   const [filtershow, setFiltershow] = useState(false);
   /*   const [showfilterbutton, setShowfilterbutton] = useState(true); */
 
@@ -18,6 +25,7 @@ const PizzaList = ({ food, loading, title, showFilterbutton, onFilterSelectAll }
   return (
     <section className="food">
       <Filters
+        changePizzasFiltered={changePizzasFiltered}
         isActive={filtershow}
         showFilter={setFiltershow}
         pizzas={food}

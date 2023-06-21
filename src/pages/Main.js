@@ -16,33 +16,10 @@ const Main = () => {
     setGeneralFilters(filter);
   };
 
-  /*   useEffect(() => {
-    const getPizzas = async () => {
-      const data = await getDocs(usersCollectionRef);
-      setPizzas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      setIsLoading(false);
-    };
-    const getSnacks = async () => {
-      const data = await getDocs(snacksCollectionRef);
-      setSnacks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      setIsLoading(false);
-    };
-    const usersCollectionRef = collection(db, "food");
-    const snacksCollectionRef = collection(db, "snacks");
-    getPizzas();
-    getSnacks();
-  }, []); */
-  /*   const All = filterAll; */
-
   useEffect(() => {
     const pizzasCollectionRef = collection(db, "food");
     const snacksCollectionRef = collection(db, "snacks");
 
-    /*     const sorteredPizzas = query(
-      pizzasCollectionRef,
-      where("category", "array-contains", filterAll)
-    );
- */
     Promise.all([getDocs(pizzasCollectionRef), getDocs(snacksCollectionRef)]).then(
       ([usersData, snacksData]) => {
         setPizzas(usersData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -51,13 +28,23 @@ const Main = () => {
       }
     );
   }, []);
-  const visibleData = pizzas.filter((item) => {
+  /*   const visibleData = pizzas.filter((item) => {
     const arraysHaveSameValues = generalFilters.some((value) => item.category.includes(value));
     if (arraysHaveSameValues) {
       return item.category.every((value, index) => value === generalFilters[index]);
     } else {
       return pizzas;
     }
+  }); */
+
+  const visibleData = pizzas.filter((pizza) => {
+    return generalFilters.every((ingredient) => {
+      if (ingredient === undefined) {
+        return true;
+      } else {
+        return pizza.category.includes(ingredient);
+      }
+    });
   });
   console.log(generalFilters);
   console.log(visibleData);
