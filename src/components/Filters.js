@@ -5,10 +5,20 @@ const Filters = ({ isActive, showFilter, onFilterSelectAll }) => {
   const [filtercheese, setFiltercheese] = useState(0);
   const [filtermeat, setFiltermeat] = useState(0);
   const [filterchoice, setFilterchoice] = useState(0);
-  const all = ["Хит", "Новинка"];
-  const cheese = ["Моцарелла", "Чеддер", "Пармезан"];
-  const meat = ["Пепперони", "Курица", "Ветчина", "Говядина", "Бекон"];
-  const choice = ["Лук", "Перец", "Томаты", "Чеснок", "Огурцы", "Шампиньоны"];
+  const all = ["Хит", "Новинка", "Соус альфредо", "Томатный соус"];
+  const cheese = ["Моцарелла", "Чеддер", "Пармезан", "Блю-чиз", "Брынза"];
+  const meat = ["Пепперони", "Курица", "Ветчина", "Говядина", "Бекон", "Чоризо"];
+  const choice = [
+    "Лук",
+    "Перец",
+    "Томаты",
+    "Чеснок",
+    "Огурцы",
+    "Шампиньоны",
+    "Ананасы",
+    "Итальянские травы",
+    "Халапеньо",
+  ];
   const onReset = () => {
     setFilterall(0);
     setFiltercheese(0);

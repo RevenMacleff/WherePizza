@@ -13,7 +13,6 @@ const PizzaList = ({
   changePizzasFiltered,
 }) => {
   const [filtershow, setFiltershow] = useState(false);
-  /*   const [showfilterbutton, setShowfilterbutton] = useState(true); */
 
   const items = food.map((item, id) => {
     return <Food key={id} {...item} loading={loading}></Food>;

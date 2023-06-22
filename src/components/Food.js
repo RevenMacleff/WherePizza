@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import Skeleton from "./PizzaBlock/Skeleton";
-import Modal from "./Modal";
+import ModalPizza from "./ModalPizza";
+import ModalFood from "./ModalFood";
 const Food = ({ id, img, name, descr, price, loading, category }) => {
   const [modalshow, setModalshow] = useState(false);
   return (
     <div className="food__block" key={id}>
-      <Modal
-        img={img}
-        modalChange={setModalshow}
-        modalshow={modalshow}
-        name={name}
-        category={category}></Modal>
+      {category ? (
+        <ModalPizza
+          img={img}
+          modalChange={setModalshow}
+          modalshow={modalshow}
+          name={name}
+          category={category}></ModalPizza>
+      ) : (
+        <ModalFood
+          img={img}
+          modalChange={setModalshow}
+          modalshow={modalshow}
+          name={name}></ModalFood>
+      )}
       <div className="food__up">
         <div className="food__img">
           {loading ? <Skeleton></Skeleton> : <img src={img} alt={name} />}
