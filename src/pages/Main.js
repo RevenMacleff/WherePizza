@@ -13,7 +13,7 @@ const Main = () => {
   const [generalFilters, setGeneralFilters] = useState([]);
 
   const onFilterSelectAll = (filter) => {
-    setGeneralFilters(filter);
+    setGeneralFilters(filter.filter((ingredient) => ingredient));
   };
 
   useEffect(() => {
@@ -28,16 +28,8 @@ const Main = () => {
       }
     );
   }, []);
-  /*   const visibleData = pizzas.filter((item) => {
-    const arraysHaveSameValues = generalFilters.some((value) => item.category.includes(value));
-    if (arraysHaveSameValues) {
-      return item.category.every((value, index) => value === generalFilters[index]);
-    } else {
-      return pizzas;
-    }
-  }); */
 
-  const visibleData = pizzas.filter((pizza) => {
+  /*   const visibleData = pizzas.filter((pizza) => {
     return generalFilters.every((ingredient) => {
       if (ingredient === undefined) {
         return true;
@@ -46,8 +38,10 @@ const Main = () => {
       }
     });
   });
-  console.log(generalFilters);
-  console.log(visibleData);
+ */
+  const visibleData = pizzas.filter((pizza) => {
+    return generalFilters.every((ingredient) => pizza.category.includes(ingredient));
+  });
   return (
     <>
       <Categories></Categories>
