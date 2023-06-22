@@ -21,7 +21,7 @@ const Food = ({ id, img, name, descr, price, loading, category }) => {
           name={name}></ModalFood>
       )}
       <div className="food__up">
-        <div className="food__img">
+        <div className="food__img" onClick={() => setModalshow(true)}>
           {loading ? <Skeleton></Skeleton> : <img src={img} alt={name} />}
         </div>
         <div className="food__name">{name}</div>
