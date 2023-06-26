@@ -1,76 +1,56 @@
 import React, { useState } from "react";
+import { allFilter, cheeseFilter, meatFilter, choiceFilter } from "../constants/constants";
 
 const Filters = ({ isActive, showFilter, onFilterSelectAll }) => {
-  const [filterall, setFilterall] = useState(0);
-  const [filtercheese, setFiltercheese] = useState(0);
-  const [filtermeat, setFiltermeat] = useState(0);
-  const [filterchoice, setFilterchoice] = useState(0);
-  const all = ["Хит", "Новинка", "Соус альфредо", "Томатный соус"];
-  const cheese = ["Моцарелла", "Чеддер", "Пармезан", "Блю-чиз", "Брынза"];
-  const meat = ["Пепперони", "Курица", "Ветчина", "Говядина", "Бекон", "Чоризо"];
-  const choice = [
-    "Лук",
-    "Перец",
-    "Томаты",
-    "Чеснок",
-    "Огурцы",
-    "Шампиньоны",
-    "Ананасы",
-    "Итальянские травы",
-    "Халапеньо",
-  ];
-  const onReset = () => {
-    setFilterall(0);
-    setFiltercheese(0);
-    setFilterchoice(0);
-    setFiltermeat(0);
+  const [filterall, setFilterall] = useState(allFilter);
+  const [filtercheese, setFiltercheese] = useState(cheeseFilter);
+  const [filtermeat, setFiltermeat] = useState(meatFilter);
+  const [filterchoice, setFilterchoice] = useState(choiceFilter);
+  const handleFilterClick = (filters, setFilters) => (item) => {
+    const index = filters.findIndex((i) => i.id === item.id);
+    const updateItems = [...filters];
+    updateItems[index] = { ...item, isActive: !item.isActive };
+    setFilters(updateItems);
   };
-
-  const allMap = all.map((categoryName, id) => {
-    return (
-      <li
-        key={id}
-        className={filterall.id === id ? "filters__check filters__check_active" : "filters__check"}
-        onClick={() => setFilterall({ name: categoryName, id: id })}>
-        {categoryName}
-      </li>
-    );
-  });
-
-  const CheeseMap = cheese.map((categoryName, id) => {
-    return (
+  const handleItemClickAll = handleFilterClick(filterall, setFilterall);
+  const handleItemClickCheese = handleFilterClick(filtercheese, setFiltercheese);
+  const handleItemClickMeat = handleFilterClick(filtermeat, setFiltermeat);
+  const handleItemClickChoice = handleFilterClick(filterchoice, setFilterchoice);
+  function renderFilterItems(filterData, handleItemClick) {
+    return filterData.map((categoryName, id) => (
       <li
         key={id}
         className={
-          filtercheese.id === id ? "filters__check filters__check_active" : "filters__check"
+          categoryName.isActive ? "filters__check filters__check_active" : "filters__check"
         }
-        onClick={() => setFiltercheese({ name: categoryName, id: id })}>
-        {categoryName}
+        onClick={() => handleItemClick(categoryName)}>
+        {categoryName.name}
       </li>
-    );
-  });
-  const MeatMap = meat.map((categoryName, id) => {
-    return (
-      <li
-        key={id}
-        className={filtermeat.id === id ? "filters__check filters__check_active" : "filters__check"}
-        onClick={() => setFiltermeat({ name: categoryName, id: id })}>
-        {categoryName}
-      </li>
-    );
-  });
-  const ChoiceMap = choice.map((categoryName, id) => {
-    return (
-      <li
-        key={id}
-        className={
-          filterchoice.id === id ? "filters__check filters__check_active" : "filters__check"
-        }
-        onClick={() => setFilterchoice({ name: categoryName, id: id })}>
-        {categoryName}
-      </li>
-    );
-  });
+    ));
+  }
+  const allMap = renderFilterItems(filterall, handleItemClickAll);
+  const cheeseMap = renderFilterItems(filtercheese, handleItemClickCheese);
+  const meatMap = renderFilterItems(filtermeat, handleItemClickMeat);
+  const choiceMap = renderFilterItems(filterchoice, handleItemClickChoice);
+  const onReset = () => {
+    setFilterall(allFilter);
+    setFiltercheese(cheeseFilter);
+    setFilterchoice(choiceFilter);
+    setFiltermeat(meatFilter);
+  };
+  function filteredItems(item) {
+    return item.filter((i) => {
+      return i.isActive === true;
+    });
+  }
+  const filteredAll = filteredItems(filterall);
+  const filteredCheese = filteredItems(filtercheese);
+  const filteredMeat = filteredItems(filtermeat);
+  const filteredChoice = filteredItems(filterchoice);
+
+  const mappedArrays = [filteredAll, filteredCheese, filteredMeat, filteredChoice].flatMap((arr) =>
+    arr.map((obj) => obj.name)
+  );
 
   let filters = "filters";
   if (isActive === true) {
@@ -102,26 +82,21 @@ const Filters = ({ isActive, showFilter, onFilterSelectAll }) => {
             <div className="filters__subtitle">Общее</div>
             <ul className="filters__category">{allMap}</ul>
             <div className="filters__subtitle">Сыр</div>
-            <ul className="filters__category">{CheeseMap}</ul>
+            <ul className="filters__category">{cheeseMap}</ul>
             <div className="filters__subtitle">Мясо</div>
-            <ul className="filters__category">{MeatMap}</ul>
+            <ul className="filters__category">{meatMap}</ul>
             <div className="filters__subtitle">Компонент</div>
-            <ul className="filters__category">{ChoiceMap}</ul>
+            <ul className="filters__category">{choiceMap}</ul>
           </div>
           <div className="filters__buttons">
-            <button className="button button_none" onClick={() => onReset()}>
+            <button
+              className="button button_none"
+              onClick={() => {
+                onReset();
+              }}>
               Сбросить
             </button>
-            <button
-              className="button"
-              onClick={() =>
-                onFilterSelectAll([
-                  filterall.name,
-                  filtercheese.name,
-                  filterchoice.name,
-                  filtermeat.name,
-                ])
-              }>
+            <button className="button" onClick={() => onFilterSelectAll(mappedArrays)}>
               Применить
             </button>
           </div>
