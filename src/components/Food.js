@@ -12,7 +12,9 @@ const Food = ({ id, img, name, descr, price, loading, category }) => {
           modalChange={setModalshow}
           modalshow={modalshow}
           name={name}
-          category={category}></ModalPizza>
+          category={category}
+          price={price}
+          id={id}></ModalPizza>
       ) : (
         <ModalFood
           img={img}

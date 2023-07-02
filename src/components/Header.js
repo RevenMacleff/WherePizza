@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Header = () => {
+  const { totalPrice } = useSelector((state) => state.cart);
   return (
     <div className="header">
       <div className="container">
@@ -19,7 +20,7 @@ const Header = () => {
               <div className="cart__img">
                 <img src="img/shopping_bag.svg" alt="cart" />
               </div>
-              <div className="cart__price">0 ₽</div>
+              <div className="cart__price">{totalPrice} ₽</div>
             </div>
           </Link>
         </div>

@@ -1,12 +1,33 @@
 import { getDocs, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase-config";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/slices/cartSlice";
+const types = [0, 1];
+const sizes = [0, 1, 2];
+const typeNames = ["тонкое", "традиционное"];
+const sizeNames = ["маленькая", "средняя", "большая"];
+const ModalPizza = ({ modalshow, modalChange, img, name, category, id, price }) => {
+  const dispatch = useDispatch();
 
-const ModalPizza = ({ modalshow, modalChange, img, name, category }) => {
+  const [activeSize, setActiveSize] = useState(0);
+  const [activeType, setActiveType] = useState(0);
   const [del, setDel] = useState([]);
   const [addings, setAddings] = useState([]);
   const modal = modalshow ? "modal active" : "modal";
   const overlay = modalshow ? "modal-overlay active" : "modal-overlay";
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      name,
+      price: price,
+      img,
+      type: typeNames[activeType],
+      size: sizeNames[activeType],
+    };
+    dispatch(addItem(item));
+  };
   useEffect(() => {
     const getAddings = async () => {
       const data = await getDocs(addingsCollectionRef);
@@ -102,28 +123,39 @@ const ModalPizza = ({ modalshow, modalChange, img, name, category }) => {
           </div>
           <div className="modal__right">
             <div className="modal__wrap">
-              {" "}
               <div className="modal__scroll">
-                {" "}
                 <div className="modal__title">{name}</div>
                 <div className="modal__subtitle">30 см, традиционное тесто</div>
                 <ul className="modal__deletes">{elements}</ul>
                 <div className="modal__selector">
                   <ul>
-                    <li>Маленькая</li>
-                    <li className="active">Средняя</li>
-                    <li>Большая</li>
+                    {sizes.map((size, index) => (
+                      <li
+                        key={index}
+                        onClick={() => setActiveSize(size)}
+                        className={activeSize === size ? "active" : ""}>
+                        {sizeNames[size]}
+                      </li>
+                    ))}
                   </ul>
                   <ul>
-                    <li className="active">Тонкое</li>
-                    <li>Традиционное</li>
+                    {types.map((type, index) => (
+                      <li
+                        key={index}
+                        onClick={() => setActiveType(type)}
+                        className={activeType === type ? "active" : ""}>
+                        {typeNames[type]}
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div className="modal__add">Добавить по вкусу</div>
                 <div className="modal__addings">{toppings}</div>
               </div>
             </div>
-            <div className="modal__button">Добавить в корзину за 400Р</div>
+            <div className="modal__button" onClick={onClickAdd}>
+              Добавить в корзину за {price} Р
+            </div>
           </div>
         </div>
       </div>
