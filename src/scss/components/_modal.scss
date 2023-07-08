@@ -36,6 +36,12 @@
   height: 680px;
   padding: 20px;
   display: none;
+  &_food {
+    width: 776px;
+    height: 388px;
+  }
+  &__descr {
+  }
   &__block {
     display: flex;
     height: 100%;
@@ -46,11 +52,19 @@
     img {
       height: 100%;
     }
+    &_food {
+      padding: 60px 60px;
+    }
   }
   &__right {
     padding: 20px;
     position: relative;
     width: 100%;
+    &_food {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   }
   &__scroll {
     height: 85%;
@@ -130,6 +144,9 @@
     border-radius: 10px;
     cursor: pointer;
     transition: 0.5s all ease;
+    &_food {
+      margin: 0px;
+    }
     &:hover {
       position: relative;
       transform: scale(1.1);

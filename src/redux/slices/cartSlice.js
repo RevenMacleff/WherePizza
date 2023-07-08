@@ -32,12 +32,9 @@ export const cartSlice = createSlice({
       if (findItem && findItem.count > 0) {
         findItem.count--;
       }
-
-      if (state.totalPrice > 0 && findItem.count !== -1) {
-        state.totalPrice -= findItem.price;
-      } else if (state.totalPrice <= 0) {
-        state.totalPrice = 0;
-      }
+      state.totalPrice = state.items.reduce((sum, obj) => {
+        return obj.price * obj.count + sum;
+      }, 0);
     },
 
     removeItem(state, { payload }) {
@@ -55,7 +52,6 @@ export const cartSlice = createSlice({
     },
   },
 });
-
 export const { removeItem, clearItem, addItem, minusItem } = cartSlice.actions;
 
 export default cartSlice.reducer;

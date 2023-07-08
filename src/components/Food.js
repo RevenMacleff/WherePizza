@@ -17,6 +17,7 @@ const Food = ({ id, img, name, descr, price, loading, category }) => {
           id={id}></ModalPizza>
       ) : (
         <ModalFood
+          price={price}
           img={img}
           modalChange={setModalshow}
           modalshow={modalshow}

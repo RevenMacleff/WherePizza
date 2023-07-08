@@ -1,31 +1,34 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addItem, minusItem, removeItem } from "../redux/slices/cartSlice";
-const CartItem = ({ name, type, size, count, price, id }) => {
+const CartItem = ({ name, type, size, count, price, id, img }) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
     dispatch(addItem({ id, type, size }));
   };
-
+  const onClickRemove = () => {
+    dispatch(removeItem({ id, type, size }));
+  };
   const onClickMinus = () => {
     dispatch(minusItem({ id, type, size }));
   };
 
-  const onClickRemove = () => {
-    dispatch(removeItem({ id, type, size }));
-  };
   return (
     <div className="pizza__order">
       <div className="pizza__left">
         <div className="pizza__img">
-          <img src="./img/Rectangle 4.png" alt="pizza" />
+          <img src={img} alt="pizza" />
         </div>
         <div className="pizza__text">
           <div className="pizza__subtitle">{name}</div>
-          <div className="pizza__descr">
-            {type}, {size}
-          </div>
+          {type ? (
+            <div className="pizza__descr">
+              {type}, {size}
+            </div>
+          ) : (
+            <div className="pizza__descr"></div>
+          )}
         </div>
       </div>
       <div className="pizza__right">

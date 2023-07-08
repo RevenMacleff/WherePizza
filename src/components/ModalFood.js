@@ -1,19 +1,18 @@
 import React from "react";
-
-const ModalFood = ({ modalshow, modalChange, img, name, category }) => {
-  let modal = "modal";
-  if (modalshow === true) {
-    modal += " active";
-  } else {
-    modal = "modal";
-  }
-  let overlay = "modal-overlay";
-  if (modalshow === true) {
-    overlay += " active";
-  } else {
-    overlay = "modal";
-  }
-
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/slices/cartSlice";
+const ModalFood = ({ modalshow, modalChange, img, name, descr, price }) => {
+  const dispatch = useDispatch();
+  const modal = modalshow ? "modal modal_food active" : "modal";
+  const overlay = modalshow ? "modal-overlay active" : "modal-overlay";
+  const onClickAdd = () => {
+    const item = {
+      name,
+      price: price,
+      img,
+    };
+    dispatch(addItem(item));
+  };
   return (
     <div>
       <div className={overlay}></div>
@@ -33,13 +32,16 @@ const ModalFood = ({ modalshow, modalChange, img, name, category }) => {
         </div>
 
         <div className="modal__block">
-          <div className="modal__left">
+          <div className="modal__left modal__left_food">
             <img src={img} alt="" />
           </div>
-          <div className="modal__right">
+          <div className="modal__right modal__right_food">
             <div className="modal__title">{name}</div>
-            <div className="modal__subtitle">30 см, традиционное тесто</div>
-            <ul className="modal__deletes"></ul>
+            <div className="modal__descr">{descr}</div>
+            <div className="modal__button modal__button_food" onClick={onClickAdd}>
+              {" "}
+              Добавить в корзину за {price} Р
+            </div>
           </div>
         </div>
       </div>
