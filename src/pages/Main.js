@@ -15,7 +15,7 @@ const Main = () => {
   const [generalFilters, setGeneralFilters] = useState([]);
 
   const onFilterSelectAll = (filter) => {
-    setGeneralFilters(filter.filter((ingredient) => ingredient));
+    setGeneralFilters(filter);
   };
 
   useEffect(() => {

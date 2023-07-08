@@ -31,9 +31,7 @@ export const cartSlice = createSlice({
 
       if (findItem && findItem.count > 0) {
         findItem.count--;
-      } /* else if (findItem && findItem.count === 0) {
-        state.removeItem(payload);
-      } */
+      }
 
       if (state.totalPrice > 0 && findItem.count !== -1) {
         state.totalPrice -= findItem.price;

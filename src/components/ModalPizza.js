@@ -9,7 +9,6 @@ const typeNames = ["тонкое", "традиционное"];
 const sizeNames = ["маленькая", "средняя", "большая"];
 const ModalPizza = ({ modalshow, modalChange, img, name, category, id, price }) => {
   const dispatch = useDispatch();
-
   const [activeSize, setActiveSize] = useState(0);
   const [activeType, setActiveType] = useState(0);
   const [del, setDel] = useState([]);
@@ -24,7 +23,7 @@ const ModalPizza = ({ modalshow, modalChange, img, name, category, id, price }) 
       price: price,
       img,
       type: typeNames[activeType],
-      size: sizeNames[activeType],
+      size: sizeNames[activeSize],
     };
     dispatch(addItem(item));
   };
